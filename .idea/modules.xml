@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/springboot-log4j2-bestPractice.iml" filepath="$PROJECT_DIR$/springboot-log4j2-bestPractice.iml" />
+      <module fileurl="file://$PROJECT_DIR$/springboot-asyncLogger-baseOnAspect.iml" filepath="$PROJECT_DIR$/springboot-asyncLogger-baseOnAspect.iml" />
     </modules>
   </component>
 </project>
