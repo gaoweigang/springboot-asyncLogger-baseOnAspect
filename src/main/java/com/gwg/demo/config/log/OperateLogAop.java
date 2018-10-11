@@ -18,15 +18,13 @@ import org.springframework.stereotype.Component;
 import java.lang.reflect.Method;
 
 /**
- * @author rensong
- * @version 创建时间：2018年7月25日 下午6:28:52 类说明
  */
 @Aspect
 @Component
 @Slf4j
 public class OperateLogAop {
 
-	@Pointcut(value = "@annotation(com.houbank.telesale.back.common.annotation.BussinessLog)")
+	@Pointcut(value = "@annotation(com.gwg.demo.config.log.BussinessLog)")
 	public void cutService() {
 
 	}

@@ -6,11 +6,13 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="springboot-asyncLogger-baseOnAspect" />
         <module name="springboot-log-bestPractice" />
         <module name="springboot-log4j2-bestPractice" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel target="1.8">
+      <module name="springboot-asyncLogger-baseOnAspect" target="1.8" />
       <module name="springboot-log-bestPractice" target="1.8" />
       <module name="springboot-log4j2-bestPractice" target="1.8" />
     </bytecodeTargetLevel>
