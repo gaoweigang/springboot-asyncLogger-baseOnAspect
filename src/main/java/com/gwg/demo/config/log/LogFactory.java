@@ -1,31 +1,29 @@
 package com.gwg.demo.config.log;
 
-import com.houbank.telesale.back.constant.enums.LogSucceed;
-import com.houbank.telesale.back.constant.enums.LogType;
-import com.houbank.telesale.back.domain.BackSysOperationLogWithBLOBs;
+import com.gwg.demo.domain.SysOperationLog;
 
 import java.util.Date;
 
 /**
  * 日志对象创建工厂
- * 
  */
 public class LogFactory {
 
 	/**
 	 * 创建操作日志
 	 */
-	public static BackSysOperationLogWithBLOBs createOperationLog(LogType logType, String userId, String bussinessName,
-			String clazzName, String methodName, String msg, LogSucceed succeed) {
-		BackSysOperationLogWithBLOBs operationLog = new BackSysOperationLogWithBLOBs();
-		operationLog.setLogType(logType.getMessage());
-		operationLog.setLogName(bussinessName);
-		operationLog.setUserId(userId);
-		operationLog.setClassname(clazzName);
-		operationLog.setMethod(methodName);
-		operationLog.setCreateDate(new Date());
-		operationLog.setSucceed(succeed.getMessage());
-		operationLog.setMessage(msg);
-		return operationLog;
+	public static SysOperationLog createOperationLog(String logType, String userId, String bussinessName,
+													 String clazzName, String methodName, String request, String response, String msg) {
+		SysOperationLog sysOperationLog = new SysOperationLog();
+		sysOperationLog.setLogType(logType); //日志类型
+		sysOperationLog.setLogName(bussinessName);
+		sysOperationLog.setUserId(userId);
+		sysOperationLog.setClassname(clazzName);
+		sysOperationLog.setMethod(methodName);
+		sysOperationLog.setRequest(request);//方法入参
+		sysOperationLog.setResponse(response);//方法出参
+		sysOperationLog.setCreateDate(new Date());
+		sysOperationLog.setMessage(msg);
+		return sysOperationLog;
 	}
 }

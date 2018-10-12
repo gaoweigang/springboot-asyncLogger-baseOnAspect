@@ -14,9 +14,6 @@ import java.io.Serializable;
 @Scope(scopeName = WebApplicationContext.SCOPE_REQUEST)
 public class LogObjectHolder implements Serializable{
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	private Object object = null;
 
@@ -28,6 +25,11 @@ public class LogObjectHolder implements Serializable{
 		this.object = object;
 	}
 
+
+	/**
+	 * 获取当前请求作用域的LogObjectHolder对象
+	 * @return
+	 */
 	public static LogObjectHolder me() {
 		LogObjectHolder bean = SpringContextHolder.getBean(LogObjectHolder.class);
 		return bean;

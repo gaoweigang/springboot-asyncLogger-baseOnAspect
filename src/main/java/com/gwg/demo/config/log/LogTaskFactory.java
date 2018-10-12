@@ -1,15 +1,11 @@
 package com.gwg.demo.config.log;
 
-import com.houbank.telesale.back.constant.enums.LogSucceed;
-import com.houbank.telesale.back.constant.enums.LogType;
-import com.houbank.telesale.back.domain.BackSysOperationLogWithBLOBs;
-import com.houbank.telesale.back.mapper.BackSysOperationLogMapper;
-import com.houbank.telesale.back.util.SpringContextHolder;
+import com.gwg.demo.config.SpringContextHolder;
+import com.gwg.demo.domain.SysOperationLog;
+import com.gwg.demo.mapper.SysOperationLogMapper;
+import com.gwg.demo.util.ExceptionUtil;
 import lombok.extern.slf4j.Slf4j;
 
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.io.StringWriter;
 import java.util.TimerTask;
 
 /**
@@ -19,16 +15,15 @@ import java.util.TimerTask;
 @Slf4j
 public class LogTaskFactory {
 
-	private static BackSysOperationLogMapper operationLogMapper = SpringContextHolder
-			.getBean(BackSysOperationLogMapper.class);
+	private static SysOperationLogMapper operationLogMapper = SpringContextHolder.getBean(SysOperationLogMapper.class);
 
-	public static TimerTask bussinessLog(final String userId, final String bussinessName, final String clazzName,
-			final String methodName, final String msg) {
+	public static TimerTask bussinessLog(final String logType, final String userId, final String bussinessName, final String clazzName,
+			final String methodName, final String request, final String response, final String msg) {
 		return new TimerTask() {
 			@Override
 			public void run() {
-				BackSysOperationLogWithBLOBs operationLog = LogFactory.createOperationLog(LogType.BUSSINESS, userId,
-						bussinessName, clazzName, methodName, msg, LogSucceed.SUCCESS);
+				SysOperationLog operationLog = LogFactory.createOperationLog(logType, userId,
+						bussinessName, clazzName, methodName, request, response, msg);
 				try {
 					operationLogMapper.insert(operationLog);
 				} catch (Exception e) {
@@ -38,13 +33,14 @@ public class LogTaskFactory {
 		};
 	}
 
-	public static TimerTask exceptionLog(final String userId, final Exception exception) {
+	public static TimerTask exceptionLog(final String logType, final String userId, final String bussinessName, final String clazzName,
+										 final String methodName, final String request, final String response, final Exception exception) {
 		return new TimerTask() {
 			@Override
 			public void run() {
-				String msg = getExceptionMsg(exception);
-				BackSysOperationLogWithBLOBs operationLog = LogFactory.createOperationLog(LogType.EXCEPTION, userId, "",
-						null, null, msg, LogSucceed.FAIL);
+				String msg = ExceptionUtil.convertExceptionMsg(exception);
+				SysOperationLog operationLog = LogFactory.createOperationLog(logType, userId,
+						bussinessName, clazzName, methodName, request, response, msg);
 				try {
 					operationLogMapper.insert(operationLog);
 				} catch (Exception e) {
@@ -54,23 +50,5 @@ public class LogTaskFactory {
 		};
 	}
 
-	/**
-	 * 获取异常的具体信息
-	 * 
-	 * @param e
-	 * @return
-	 */
-	public static String getExceptionMsg(Exception e) {
-		StringWriter sw = new StringWriter();
-		try {
-			e.printStackTrace(new PrintWriter(sw));
-		} finally {
-			try {
-				sw.close();
-			} catch (IOException e1) {
-				e1.printStackTrace();
-			}
-		}
-		return sw.getBuffer().toString().replaceAll("\\$", "T");
-	}
+
 }

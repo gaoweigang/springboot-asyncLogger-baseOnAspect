@@ -12,8 +12,15 @@ import java.lang.annotation.*;
 public @interface BussinessLog {
 
 	/**
-	 * 业务的名称,例如:"修改菜单"
+	 * 日志类型
 	 */
-	String value() default "";
+	LogType value();
+
+	/**
+	 * 日志名称
+	 */
+	String logName() default "";
+
+
 
 }

@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gwg.demo.mapper.SysOperationLogMapper" >
+  <resultMap id="BaseResultMap" type="com.gwg.demo.domain.SysOperationLog" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="log_type" property="logType" jdbcType="VARCHAR" />
+    <result column="log_name" property="logName" jdbcType="VARCHAR" />
+    <result column="user_id" property="userId" jdbcType="VARCHAR" />
+    <result column="classname" property="classname" jdbcType="VARCHAR" />
+    <result column="method" property="method" jdbcType="VARCHAR" />
+    <result column="request" property="request" jdbcType="VARCHAR" />
+    <result column="response" property="response" jdbcType="VARCHAR" />
+    <result column="message" property="message" jdbcType="VARCHAR" />
+    <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, log_type, log_name, user_id, classname, method, request, response, message, create_date
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.gwg.demo.domain.SysOperationLogExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from tbl_sys_operation_log
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tbl_sys_operation_log
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tbl_sys_operation_log
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.gwg.demo.domain.SysOperationLogExample" >
+    delete from tbl_sys_operation_log
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.gwg.demo.domain.SysOperationLog" >
+    insert into tbl_sys_operation_log (id, log_type, log_name, 
+      user_id, classname, method, 
+      request, response, message, 
+      create_date)
+    values (#{id,jdbcType=INTEGER}, #{logType,jdbcType=VARCHAR}, #{logName,jdbcType=VARCHAR}, 
+      #{userId,jdbcType=VARCHAR}, #{classname,jdbcType=VARCHAR}, #{method,jdbcType=VARCHAR}, 
+      #{request,jdbcType=VARCHAR}, #{response,jdbcType=VARCHAR}, #{message,jdbcType=VARCHAR}, 
+      #{createDate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.gwg.demo.domain.SysOperationLog" >
+    insert into tbl_sys_operation_log
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="logType != null" >
+        log_type,
+      </if>
+      <if test="logName != null" >
+        log_name,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="classname != null" >
+        classname,
+      </if>
+      <if test="method != null" >
+        method,
+      </if>
+      <if test="request != null" >
+        request,
+      </if>
+      <if test="response != null" >
+        response,
+      </if>
+      <if test="message != null" >
+        message,
+      </if>
+      <if test="createDate != null" >
+        create_date,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="logType != null" >
+        #{logType,jdbcType=VARCHAR},
+      </if>
+      <if test="logName != null" >
+        #{logName,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="classname != null" >
+        #{classname,jdbcType=VARCHAR},
+      </if>
+      <if test="method != null" >
+        #{method,jdbcType=VARCHAR},
+      </if>
+      <if test="request != null" >
+        #{request,jdbcType=VARCHAR},
+      </if>
+      <if test="response != null" >
+        #{response,jdbcType=VARCHAR},
+      </if>
+      <if test="message != null" >
+        #{message,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.gwg.demo.domain.SysOperationLogExample" resultType="java.lang.Integer" >
+    select count(*) from tbl_sys_operation_log
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tbl_sys_operation_log
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.logType != null" >
+        log_type = #{record.logType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.logName != null" >
+        log_name = #{record.logName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userId != null" >
+        user_id = #{record.userId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.classname != null" >
+        classname = #{record.classname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.method != null" >
+        method = #{record.method,jdbcType=VARCHAR},
+      </if>
+      <if test="record.request != null" >
+        request = #{record.request,jdbcType=VARCHAR},
+      </if>
+      <if test="record.response != null" >
+        response = #{record.response,jdbcType=VARCHAR},
+      </if>
+      <if test="record.message != null" >
+        message = #{record.message,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createDate != null" >
+        create_date = #{record.createDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update tbl_sys_operation_log
+    set id = #{record.id,jdbcType=INTEGER},
+      log_type = #{record.logType,jdbcType=VARCHAR},
+      log_name = #{record.logName,jdbcType=VARCHAR},
+      user_id = #{record.userId,jdbcType=VARCHAR},
+      classname = #{record.classname,jdbcType=VARCHAR},
+      method = #{record.method,jdbcType=VARCHAR},
+      request = #{record.request,jdbcType=VARCHAR},
+      response = #{record.response,jdbcType=VARCHAR},
+      message = #{record.message,jdbcType=VARCHAR},
+      create_date = #{record.createDate,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.gwg.demo.domain.SysOperationLog" >
+    update tbl_sys_operation_log
+    <set >
+      <if test="logType != null" >
+        log_type = #{logType,jdbcType=VARCHAR},
+      </if>
+      <if test="logName != null" >
+        log_name = #{logName,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="classname != null" >
+        classname = #{classname,jdbcType=VARCHAR},
+      </if>
+      <if test="method != null" >
+        method = #{method,jdbcType=VARCHAR},
+      </if>
+      <if test="request != null" >
+        request = #{request,jdbcType=VARCHAR},
+      </if>
+      <if test="response != null" >
+        response = #{response,jdbcType=VARCHAR},
+      </if>
+      <if test="message != null" >
+        message = #{message,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.gwg.demo.domain.SysOperationLog" >
+    update tbl_sys_operation_log
+    set log_type = #{logType,jdbcType=VARCHAR},
+      log_name = #{logName,jdbcType=VARCHAR},
+      user_id = #{userId,jdbcType=VARCHAR},
+      classname = #{classname,jdbcType=VARCHAR},
+      method = #{method,jdbcType=VARCHAR},
+      request = #{request,jdbcType=VARCHAR},
+      response = #{response,jdbcType=VARCHAR},
+      message = #{message,jdbcType=VARCHAR},
+      create_date = #{createDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

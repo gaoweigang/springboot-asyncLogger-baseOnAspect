@@ -2,7 +2,7 @@ package com.gwg.demo.domain;
 
 import java.util.Date;
 
-public class BackSysOperationLog {
+public class SysOperationLog {
     private Integer id;
 
     private String logType;
@@ -13,9 +13,15 @@ public class BackSysOperationLog {
 
     private String classname;
 
-    private Date createDate;
+    private String method;
 
-    private String succeed;
+    private String request;
+
+    private String response;
+
+    private String message;
+
+    private Date createDate;
 
     public Integer getId() {
         return id;
@@ -57,19 +63,43 @@ public class BackSysOperationLog {
         this.classname = classname == null ? null : classname.trim();
     }
 
+    public String getMethod() {
+        return method;
+    }
+
+    public void setMethod(String method) {
+        this.method = method == null ? null : method.trim();
+    }
+
+    public String getRequest() {
+        return request;
+    }
+
+    public void setRequest(String request) {
+        this.request = request == null ? null : request.trim();
+    }
+
+    public String getResponse() {
+        return response;
+    }
+
+    public void setResponse(String response) {
+        this.response = response == null ? null : response.trim();
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message == null ? null : message.trim();
+    }
+
     public Date getCreateDate() {
         return createDate;
     }
 
     public void setCreateDate(Date createDate) {
         this.createDate = createDate;
-    }
-
-    public String getSucceed() {
-        return succeed;
-    }
-
-    public void setSucceed(String succeed) {
-        this.succeed = succeed == null ? null : succeed.trim();
     }
 }
