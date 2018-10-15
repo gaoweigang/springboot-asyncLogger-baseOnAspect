@@ -5,7 +5,7 @@ package com.gwg.demo.config.log;
  */
 public enum LogType {
 
-    LOGIN("登录"), ADD("新增"), DELETE("删除"), UPDATE("修改"), QUERY("查询") , EXCEPTION("异常");
+    ADD("新增"), DELETE("删除"), UPDATE("修改"), QUERY("查询") , EXCEPTION("异常");
 
     String message;
 

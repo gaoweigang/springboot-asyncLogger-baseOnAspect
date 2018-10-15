@@ -14,7 +14,7 @@ public @interface BussinessLog {
 	/**
 	 * 日志类型
 	 */
-	LogType value();
+	LogType value() default LogType.QUERY;
 
 	/**
 	 * 日志名称
